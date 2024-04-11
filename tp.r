@@ -11,6 +11,7 @@ tabla <- read_xlsx("Datos_LP.xlsx",
 fuente <- "Fuente: El Observatorio Villero, La Poderosa. Relevamiento de Condiciones habitacionales 2022"
 colores1 <- c("#79155B", "#C23373", "#F6635C", "#FFBA86")
 colores2 <- c("#884A39", "#C38154", "#FFC26F", "#F9E0BB")
+colores3 <- c("#00b4eb", "#d9d9d9")
 cantidad_entrevistados <- 1222
 
 
