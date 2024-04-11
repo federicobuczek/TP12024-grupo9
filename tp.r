@@ -78,6 +78,28 @@ pie(tabla_presion_de_agua,
     cex.sub = 0.9,
     clockwise = TRUE)
 
+# Relación entre dos variables categóricas
+# Grafico de barras subdivididas
+tabla_bivariada_agua = table(tabla$`¿Tiene capacidad de almacenamiento de agua en altura?`,
+                             tabla$`¿Cómo es la presión del agua?`)
+
+barplot(tabla_bivariada_agua,
+        main = "Presión de agua según si se tiene un tanque en altura",
+        beside = FALSE,
+        horiz = FALSE,
+        ylim = c(0, 600),
+        ylab = "Cantidad de viviendas",
+        xlab = "Presión agua",
+        las = 1,
+        col = colores3,
+        sub = fuente,
+        border = NA,
+        cex.sub = 0.8)
+
+legend("topright",
+       legend = rev(rownames(tabla_bivariada_agua)),
+       fill = rev(colores3))
+
 
 # Sección 10: Servicios barriales --------
 
