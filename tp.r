@@ -85,7 +85,7 @@ tabla_bivariada_agua = table(tabla$`¿Tiene capacidad de almacenamiento de agua 
                              tabla$`¿Cómo es la presión del agua?`)
 
 barplot(tabla_bivariada_agua,
-        main = "Presión de agua según si se tiene un tanque en altura",
+        main = "Presión de agua según disponibilidad de tanque en altura",
         beside = FALSE,
         horiz = FALSE,
         ylim = c(0, 600),
@@ -119,8 +119,11 @@ pie(tabla_plaga,
     cex.sub = 0.8
 )
 
-# Tipo de plaga sobre población total (Grafico de torta)
+# Tipo de plaga sobre población total
+# Variable categorica de multiples opcioness
 
+# Calculamos las frecuencias relativas de cada plaga
+# y las ordenamos 
 cucarachas = table(factor(tabla$`¿Cuáles plagas?`))
 mosquitos = table(factor(tabla$...94))
 ratas = table(factor(tabla$...95))
@@ -128,14 +131,37 @@ tabla_plagas = data.frame(FrecuenciaAbsoluta = c(cucarachas, mosquitos, ratas))
 frec_rel_plagas = round(tabla_plagas$FrecuenciaAbsoluta / cantidad_entrevistados, 2)
 names(frec_rel_plagas) = c("Cucarachas", "Mosquitos", "Ratas")
 frec_rel_plagas = frec_rel_plagas[order(frec_rel_plagas, decreasing = TRUE)]
+
+# Lugar de las marcas
+xmin_p = 0
+xmax_p = 0.6
+sep_p = 0.1
+
 par(mar = c(5, 6, 4, 2) + 0.1)
+
 barplot(frec_rel_plagas,
         horiz = TRUE,
-        xlim = c(0, 1),
+        xlim = c(xmin_p, xmax_p),
         xlab = "Frecuencia relativa",
         main = "¿Cuales plagas?",
         sub = fuente,
-        col = colores2,
         las = 1,
-        cex.sub = 0.8)
+        cex.sub = 0.8,
+        axes = FALSE)
+
+# Añadimos etiquetas en el eje x
+etiquetas_plagas = paste(seq(xmin_p * 100, xmax_p * 100, sep_p * 100), '%', sep="")
+axis(side=1, 
+     at = seq(xmin_p, xmax_p, sep_p), 
+     labels = etiquetas_plagas)
+abline(v = axTicks(1), lty = "dashed")
+
+barplot(frec_rel_plagas,
+        horiz = TRUE,
+        xlim = c(xmin_p, xmax_p),
+        col = colores3[1],
+        las = 1,
+        cex.sub = 0.8,
+        axes = FALSE,
+        add = TRUE)
 
