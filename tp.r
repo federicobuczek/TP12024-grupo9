@@ -117,7 +117,7 @@ abline(fit1)
 axis(2, at = cY1)
 axis(1, at = cX1)
 
-# Sección 4: Propiedad----
+# Sección 4: Propiedad ----
 
 # Certificados de RENABAP (Grafico de torta)
 
@@ -172,7 +172,7 @@ legend("topright",
        fill = rev(colores3))
 
 
-# Sección 7: Electricidad----
+# Sección 7: Electricidad ----
 
 # Tipo de conexión eléctrica (Barplot)
 
@@ -186,6 +186,26 @@ barplot(tabla_conexion_electrica, names.arg = c("Sin medidor", "Medidor particul
         main = "¿Qué tipo de conexión posee a la red eléctrica?",
         sub = fuente)
   
+# Sección 8: Conectividad ----
+
+tabla_internet <- table(tabla$`¿Posee servicio de internet de banda ancha en la vivienda?`)
+tabla_internet <- tabla_internet[order(tabla_internet, decreasing = TRUE)]
+
+si_internet <- sum(tabla_internet[2:5])
+no_internet <- tabla_internet[1]
+frec_rel_internet <- round(rbind(si_internet, no_internet) / cantidad_entrevistados, 4)
+
+print(frec_rel_internet)
+
+labels_internet <- paste(c("Si", "No"), "\n ", frec_rel_internet * 100, "%")
+
+pie(rbind(si_internet, no_internet),
+    labels = labels_internet,
+    clockwise = TRUE,
+    main = "¿Posee servicio de internet de banda ancha en la vivienda?",
+    sub = fuente,
+    col = colores2)
+
 # Sección 10: Servicios barriales --------
 
 # Presencia de plagas (total de la población) (Grafico de torta)
