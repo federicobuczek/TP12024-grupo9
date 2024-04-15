@@ -47,6 +47,14 @@ mtext(paste(tiempo_de_residencia_mediana, "\n", cuartiles_tiempo_de_residencia, 
       line = -3,
       font = 2)
 
+# El uso de la mediana viene de la forma asimétrica a derecha de la distribución.
+# Al no ser simétrica, el promedio puede resultar no representativo de los datos
+# en relación a la mediana.
+# Los cuartiles permiten entender la distribución, haciendo observar en que 
+# dirección se presentan los casos extremos
+# El IQR permite ver que tan dispersos están los datos de la mediana, y no es
+# influenciada por valores atípicos.
+
 # Integrantes por vivienda (Histograma)
 
 integrantes_mediana <- paste("Mediana: ", median(tabla$`¿Cuántos integrantes hay en su vivienda?`))
