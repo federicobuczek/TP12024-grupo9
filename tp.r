@@ -21,6 +21,12 @@ cantidad_entrevistados <- 1222
 # Tiempo de residencia (Boxplot)
 
 tabla_tiempo_de_residencia <- table(tabla$`Tiempo de residencia en la vivienda actual (en años)`)
+tiempo_de_residencia_mediana <- paste("Mediana: ", median(tabla_tiempo_de_residencia))
+cuartiles_tiempo_de_residencia <- quantile(tabla_tiempo_de_residencia)
+IQR_tiempo_de_residencia <- paste("Rango intercuartílico: ", IQR(tabla_tiempo_de_residencia))
+cuartiles_tiempo_de_residencia <- paste("Cuartiles: (", cuartiles_tiempo_de_residencia[2], ",",
+                                        cuartiles_tiempo_de_residencia[3], ",",
+                                        cuartiles_tiempo_de_residencia[4], ")")
 
 boxplot(tabla_tiempo_de_residencia,
         horizontal = TRUE,
@@ -34,11 +40,18 @@ boxplot(tabla_tiempo_de_residencia,
 axis(side = 1,
      at = seq(0, 100, by = 10))
 
+mtext(paste(tiempo_de_residencia_mediana, "\n", cuartiles_tiempo_de_residencia, "\n", IQR_tiempo_de_residencia),
+      side = 3,
+      cex = 0.7,
+      adj = 1,
+      line = -3,
+      font = 2)
+
 # Integrantes por vivienda (Histograma)
 
 integrantes_mediana <- paste("Mediana: ", median(tabla$`¿Cuántos integrantes hay en su vivienda?`))
 cuartiles_integrantes <- quantile(tabla$`¿Cuántos integrantes hay en su vivienda?`)
-rango_intercuartilico_integrantes <- paste("Rango intercuartílico: ", IQR(tabla$`¿Cuántos integrantes hay en su vivienda?`))
+IQR_integrantes <- paste("Rango intercuartílico: ", IQR(tabla$`¿Cuántos integrantes hay en su vivienda?`))
 cuartiles_integrantes <- paste("Cuartiles: (", cuartiles_integrantes[2], ",",
                                cuartiles_integrantes[3], ",",
                                cuartiles_integrantes[4], ")")
@@ -55,13 +68,23 @@ plot(table(tabla$`¿Cuántos integrantes hay en su vivienda?`),
      font.lab = 2,
      frame.plot = FALSE)
 
-mtext(paste(integrantes_mediana, "\n", cuartiles_integrantes, "\n", rango_intercuartilico_integrantes),
+mtext(paste(integrantes_mediana, "\n", cuartiles_integrantes, "\n", IQR_integrantes),
       side = 3,
       cex = 0.7,
       adj = 1,
       line = -3,
       font = 2)
 
+# El uso de la mediana viene de la forma asimétrica a derecha de la distribución.
+# Al no ser simétrica, el promedio puede resultar no representativo de los datos
+# en relación a la mediana.
+# Los cuartiles permiten entender la distribución, haciendo observar en que 
+# dirección se presentan los casos extremos
+# El IQR permite ver que tan dispersos están los datos de la mediana, y no es
+# influenciada por valores atípicos.
+
+
+# Sección 4: Propiedad----
 
 # Sección 5: Agua y saneamiento --------------
 
