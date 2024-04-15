@@ -94,6 +94,45 @@ mtext(paste(integrantes_mediana, "\n", cuartiles_integrantes, "\n", IQR_integran
 
 # Sección 4: Propiedad----
 
+# Certificados de RENABAP (Grafico de torta)
+
+tabla_RENABAP <- table(tabla$`¿Posee el Certificado de Vivienda (RENABAP)`)
+frec_rel_RENABAP <- round(tabla_RENABAP / cantidad_entrevistados, 4)
+labels_RENABAP <- paste(c("No", "No corresponde", "Si"), "\n ", frec_rel_RENABAP * 100, "%")
+
+pie(tabla_RENABAP,
+    labels = labels_RENABAP,
+    col = colores1,
+    main = "¿Posee el Certificado de Vivienda (RENABAP)?",
+    sub = fuente,
+    cex.sub = 0.9,
+    clockwise = TRUE)
+
+# Sección 3: Hacinamiento----
+
+# Máximo de personas en dormitorio según integrantes (Diagrama de dispersión)
+# Correlación lineal positiva
+
+cY1 = tabla$`¿Cuál es el número MÁXIMO de personas que duermen en estos dormitorios usualmente?`
+cX1 = tabla$`¿Cuántos integrantes hay en su vivienda?`
+plot(cX1, 
+       cY1,
+       main = "Máximo de personas en dormitorio segun integrantes",
+       ylab = "Máximo personas en un solo dormitorio",
+       xlab = "Integrantes por vivienda",
+       xaxt = 'n',
+       yaxt = 'n',
+       sub = fuente,
+       cex.sub = 0.6,
+       col = "#00000020",
+       pch=16)
+
+fit1 <- lm(cY1 ~ cX1)
+abline(fit1)
+
+axis(2, at = cY1)
+axis(1, at = cX1)
+
 # Sección 5: Agua y saneamiento --------------
 
 # Presión de agua (Grafico de torta)
@@ -133,6 +172,20 @@ legend("topright",
        fill = rev(colores3))
 
 
+# Sección 7: Electricidad----
+
+# Tipo de conexión eléctrica (Barplot)
+
+tabla_conexion_electrica <- table(tabla$`¿Qué tipo de conexión posee a la red eléctrica?`)
+tabla_conexion_electrica <- tabla_conexion_electrica[order(tabla_conexion_electrica, decreasing = TRUE)]
+
+barplot(tabla_conexion_electrica, names.arg = c("Sin medidor", "Medidor particular",
+                                        "Medidor comunitario", "Sin conexión"),
+        ylim = c(0, 600),
+        col = "lightpink",
+        main = "¿Qué tipo de conexión posee a la red eléctrica?",
+        sub = fuente)
+  
 # Sección 10: Servicios barriales --------
 
 # Presencia de plagas (total de la población) (Grafico de torta)
@@ -151,7 +204,7 @@ pie(tabla_plaga,
 )
 
 # Tipo de plaga sobre población total
-# Variable categorica de multiples opcioness
+# Variable categórica de múltiples opciones
 
 # Calculamos las frecuencias relativas de cada plaga
 # y las ordenamos 
