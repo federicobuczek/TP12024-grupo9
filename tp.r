@@ -212,7 +212,7 @@ pie(rbind(si_internet, no_internet),
 
 tabla_plaga <- table(tabla$`¿Hay plagas (cucarachas, mosquitos, ratas, etc) en su vivienda y en los alrededores de la misma?`)
 porcentaje_plaga = paste(round(tabla_plaga / sum(tabla_plaga) * 100, 2), c('%'), sep = " ")
-categorias_plaga = c("Sí", "No")
+categorias_plaga = c("No", "Si")
 etiquetas_plaga = paste(categorias_plaga, porcentaje_plaga, sep = "\n")
 pie(tabla_plaga,
     main = "¿Hay plagas en tu vivienda?",
